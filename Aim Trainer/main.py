@@ -3,9 +3,7 @@ import cv2 as cv
 import numpy as np
 import pyautogui
 
-
 time.sleep(3)
-
 
 # spaw dimensions
 xSpawn = 457

@@ -29,7 +29,7 @@ def setup():
 
     # login
     login()
-    pyautogui.click(x=880, y=770)
+    pyautogui.click(x=890, y=670)
     
     # click start
     time.sleep(3)
@@ -40,8 +40,8 @@ def setup():
 
 # open website and get text
 def get_num(driver):
-    # Wait for the 'big-number' div to appear
-    wait = WebDriverWait(driver, 1)  # Adjust the timeout as needed
+    # Wait for the "big-number" div to appear
+    wait = WebDriverWait(driver, 1)
     big_number_div = wait.until(EC.visibility_of_element_located((By.CLASS_NAME, 'big-number')))
 
     page_source = driver.page_source
@@ -58,6 +58,7 @@ def get_num(driver):
         return num
     else:
         print("No 'big-number' div found")
+        return 0
 
 
 
@@ -79,7 +80,7 @@ def automate():
     driver = setup()
 
     # loop x times
-    for i in range(20):
+    for i in range(10):
         # scrape number
         num = get_num(driver)
         print(f'Number {i} = {num}')
