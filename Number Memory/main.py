@@ -80,7 +80,7 @@ def automate():
     driver = setup()
 
     # loop x times
-    for i in range(10):
+    for i in range(30):
         # scrape number
         num = get_num(driver)
         print(f'Number {i} = {num}')
