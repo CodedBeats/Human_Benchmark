@@ -71,7 +71,7 @@ def automateRound():
 def automate():
     time.sleep(2)
     global spawningNums
-    for i in range(20):
+    for i in range(40):
         automateRound()
         spawningNums += 1
 
