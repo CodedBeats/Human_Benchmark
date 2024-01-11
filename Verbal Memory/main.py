@@ -20,8 +20,12 @@ options = Options()
 options.binary_location = "C:/Program Files/BraveSoftware/Brave-Browser/Application/brave.exe"
 driver = webdriver.Chrome(service=service, options=options)
 
-# init arr of seen words
-seen_words = []
+# constants
+PLAY_BTN = (870, 660)
+START_BTN = (950, 620)
+SEEN_BTN = (880, 550)
+NEW_BTN = (1000, 550)
+
 
 # setup
 def setup():
@@ -32,17 +36,17 @@ def setup():
     # login
     login()
     # click play
-    pyautogui.click(x=870, y=660)
+    pyautogui.click(PLAY_BTN)
     
     # click start
     time.sleep(2)
-    pyautogui.click(x=950, y=620)
+    pyautogui.click(START_BTN)
 
     return driver
 
 
 # open website and get text
-def process_word(driver):
+def process_word(driver, seen_words):
     # Wait for the "word" div to appear
     wait = WebDriverWait(driver, 1)
     word_div = wait.until(EC.visibility_of_element_located((By.CLASS_NAME, 'word')))
@@ -58,13 +62,13 @@ def process_word(driver):
         value = word_div.text.strip()  # Get the text content within the div
         
         # check if word has been seen
-        if check_for_word(value):
+        if check_for_word(value, seen_words):
             # click seen
-            pyautogui.click(x=880, y=550)
+            pyautogui.click(SEEN_BTN)
             print("seen")
         else:
             # click new
-            pyautogui.click(x=1000, y=550)
+            pyautogui.click(NEW_BTN)
             print("new")
             
         # store word in seen arr
@@ -77,7 +81,7 @@ def process_word(driver):
 
 
 # check if word exists in seen words arr
-def check_for_word(word):
+def check_for_word(word, seen_words):
     if word in seen_words:
         return True
     else:
@@ -87,13 +91,16 @@ def check_for_word(word):
 
 # main func
 def automate():
+    # init arr of seen words
+    seen_words = []
+
     # setup
     driver = setup()
 
     # loop x times
     for i in range(500):
         # find and process word
-        process_word(driver)
+        process_word(driver, seen_words)
 
 
 
