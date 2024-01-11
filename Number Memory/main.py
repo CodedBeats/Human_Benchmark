@@ -20,6 +20,12 @@ options = Options()
 options.binary_location = "C:/Program Files/BraveSoftware/Brave-Browser/Application/brave.exe"
 driver = webdriver.Chrome(service=service, options=options)
 
+# constants
+PLAY_BTN = (880, 720)
+START_BTN = (950, 620)
+SUBMIT_BTN = (950, 560)
+NEXT_BTN = (950, 630)
+
 
 # setup
 def setup():
@@ -29,11 +35,13 @@ def setup():
 
     # login
     login()
-    pyautogui.click(x=890, y=670)
+    # click play
+    time.sleep(3)
+    pyautogui.click(PLAY_BTN)
     
     # click start
     time.sleep(3)
-    pyautogui.click(x=950, y=620)
+    pyautogui.click(START_BTN)
 
     return driver
 
@@ -69,6 +77,7 @@ def type_text(inputNum, waitTime):
 
     # wait for input to come up
     time.sleep(3 + waitTime)
+    
     # type num
     pyautogui.typewrite(str(inputNum))
 
@@ -80,7 +89,7 @@ def automate():
     driver = setup()
 
     # loop x times
-    for i in range(30):
+    for i in range(50):
         # scrape number
         num = get_num(driver)
         print(f'Number {i} = {num}')
@@ -89,11 +98,11 @@ def automate():
         type_text(num, i)
 
         # submit
-        pyautogui.click(x=950, y=560)
+        pyautogui.click(SUBMIT_BTN)
 
         # next
         time.sleep(2)
-        pyautogui.click(x=950, y=630)
+        pyautogui.click(NEXT_BTN)
 
 
 
