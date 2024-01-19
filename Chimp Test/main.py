@@ -3,21 +3,8 @@ import cv2 as cv
 import numpy as np
 import pyautogui
 
-time.sleep(3)
 
-# spawn dimensions
-xSpawn = 457
-ySpawn = 162
-# dimension
-widthSpawn = 970
-heightSpawn = 520
-# init numbers this round
-spawningNums = 4
-# arr of arrs storing x,y coords
-coordsArr = []
-
-
-def findNum(imgPath): 
+def findNum(imgPath, xSpawn, ySpawn, widthSpawn, heightSpawn, coordsArr): 
     # load img to look for
     template = cv.imread(imgPath, cv.IMREAD_UNCHANGED)
 
@@ -51,13 +38,13 @@ def findNum(imgPath):
 
     
 
-def automateRound():
+def automateRound(spawningNums, xSpawn, ySpawn, widthSpawn, heightSpawn, coordsArr):
     time.sleep(1)
 
     # find nums
     for i in range(spawningNums):
         imgPath = "Chimp Test/imgs/num" + str(i+1) + "Img.png"
-        findNum(imgPath)
+        findNum(imgPath, xSpawn, ySpawn, widthSpawn, heightSpawn, coordsArr)
     
     # click nums
     for i in range(spawningNums):
@@ -69,10 +56,21 @@ def automateRound():
 
 
 def automate():
+    time.sleep(3)
+    # spawn dimensions
+    xSpawn = 457
+    ySpawn = 162
+    # dimension
+    widthSpawn = 970
+    heightSpawn = 520
+    # init numbers this round
+    spawningNums = 4
+    # arr of arrs storing x,y coords
+    coordsArr = []
+
     time.sleep(2)
-    global spawningNums
     for i in range(40):
-        automateRound()
+        automateRound(spawningNums, xSpawn, ySpawn, widthSpawn, heightSpawn, coordsArr)
         spawningNums += 1
 
         # click continue
