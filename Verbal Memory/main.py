@@ -21,8 +21,8 @@ options.binary_location = "C:/Program Files/BraveSoftware/Brave-Browser/Applicat
 driver = webdriver.Chrome(service=service, options=options)
 
 # constants
-PLAY_BTN = (870, 660)
-START_BTN = (950, 620)
+PLAY_BTN = (880, 670)
+START_BTN = (950, 630)
 SEEN_BTN = (880, 550)
 NEW_BTN = (1000, 550)
 
@@ -39,7 +39,7 @@ def setup():
     pyautogui.click(PLAY_BTN)
     
     # click start
-    time.sleep(2)
+    time.sleep(3)
     pyautogui.click(START_BTN)
 
     return driver
@@ -70,9 +70,8 @@ def process_word(driver, seen_words):
             # click new
             pyautogui.click(NEW_BTN)
             print("new")
-            
-        # store word in seen arr
-        seen_words.append(value)
+            # store word in seen arr
+            seen_words.append(value)
 
     else:
         print("No 'word' div found")
@@ -98,9 +97,11 @@ def automate():
     driver = setup()
 
     # loop x times
-    for i in range(500):
+    for i in range(100):
         # find and process word
         process_word(driver, seen_words)
+
+    print(len(seen_words))
 
 
 
